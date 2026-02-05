@@ -28,7 +28,7 @@
             
             console.log(text + password);
 
-            if(text == "darre01"||text == "dorla01" && password == "darresarre" || password == "dorreborre"){
+            if(text == "darre01"&&password == "darresarre" || text == "dorla01" && password == "dorreborre"){
                 username = text;
                 window.location.href = `VHDeSrättAnvändare.html?username=${encodeURIComponent(username)}`;
             }

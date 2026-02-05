@@ -7,16 +7,32 @@
 <body>
         <h2 id="welcome"></h2>
         <button id="hyra">Hyr en elsparkcykel</button>
+        <p id="text"></p>
     <script>
-        //Tar ut URL:en så vi kan hämta 
+    //Tar ut URL:en så vi kan hämta 
         const params = new URLSearchParams(window.location.search);
-        const text = document.getElementById("welcome");
+        const welcome = document.getElementById("welcome");
         let username = params.get('username');
         if(username){
-            text.textContent = `Välkommen ${username}!`;
-        } 
-         const tekst = document.getElementById("hyra");
-         if()
+            welcome.textContent = `Välkommen ${username}!`;
+        }
+    const knapp = document.getElementById('hyra');
+    const text = document.getElementById('text');
+    const tekst = document.getElementById("hyra");
+    let isRented = false;
+         
+    knapp.addEventListener('click', function(event){
+        if(!isRented){
+            isRented = true;
+            text.textContent = "Du har hyrt en elsparkcykel!";
+            text.style.color = "green";
+            }
+            else if(isRented){
+                isRented = false;
+                text.textContent = "Du har lämnat tillbaka elsparkcykeln!";
+                text.style.color = "red";
+            }
+    })
     </script>
 </body>
 </html>
