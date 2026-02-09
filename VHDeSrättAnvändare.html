@@ -6,7 +6,7 @@
 </head>
 <body>
         <h2 id="welcome"></h2>
-        <button id="hyra">Hyr en elsparkcykel</button>
+        <button id="hyra">Hyr en elsparkcykel i 1h</button>
         <p id="text"></p>
     <script>
     //Tar ut URL:en så vi kan hämta 
@@ -16,21 +16,28 @@
         if(username){
             welcome.textContent = `Välkommen ${username}!`;
         }
-    const knapp = document.getElementById('hyra');
+        const tid = 3600;
+        const knapp = document.getElementById('hyra');
     const text = document.getElementById('text');
     const tekst = document.getElementById("hyra");
-    let isRented = false;
+    let Rented = false;
          
     knapp.addEventListener('click', function(event){
-        if(!isRented){
-            isRented = true;
-            text.textContent = "Du har hyrt en elsparkcykel!";
+        if(!Rented){
+            Rented = true;
+            text.textContent = "Du hyr en elsparkcykel!";
             text.style.color = "green";
+            const timerId = setInterval(function(){
+                tid--;
+            }, 1000);
             }
-            else if(isRented){
-                isRented = false;
+            else if(Rented){
+                Rented = false;
                 text.textContent = "Du har lämnat tillbaka elsparkcykeln!";
                 text.style.color = "red";
+                text.textContent = tid;
+                text.style.color = "red";
+                clearInterval(timerId);
             }
     })
     </script>
