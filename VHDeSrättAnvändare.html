@@ -8,38 +8,54 @@
         <h2 id="welcome"></h2>
         <button id="hyra">Hyr en elsparkcykel i 1h</button>
         <p id="text"></p>
+        <p id="teht"></p>
     <script>
-    //Tar ut URL:en så vi kan hämta 
         const params = new URLSearchParams(window.location.search);
         const welcome = document.getElementById("welcome");
         let username = params.get('username');
         if(username){
             welcome.textContent = `Välkommen ${username}!`;
         }
-        const tid = 3600;
+        let tid = 60;
         const knapp = document.getElementById('hyra');
-    const text = document.getElementById('text');
-    const tekst = document.getElementById("hyra");
-    let Rented = false;
-         
-    knapp.addEventListener('click', function(event){
-        if(!Rented){
-            Rented = true;
-            text.textContent = "Du hyr en elsparkcykel!";
-            text.style.color = "green";
-            const timerId = setInterval(function(){
-                tid--;
-            }, 1000);
-            }
-            else if(Rented){
-                Rented = false;
+        const text = document.getElementById('text');
+        const teht = document.getElementById("teht");
+        let timerId = null;
+        let rented = false;
+
+        teht.textContent = tid + " min";
+        knapp.addEventListener('click', function (event) {
+            if (!rented) {
+                rented = true;
+                text.textContent = "Du hyr en elsparkcykel!";
+                text.style.color = "green";
+
+                timerId = setInterval(function () {
+                    if (tid > 0) {
+                        tid--;
+                        teht.textContent = tid + " min";
+                    }
+                    if (tid === 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        rented = false;
+                        text.textContent = "Tiden är slut";
+                        text.style.color = "red";
+                        tid = 60;
+                        teht.textContent = tid + " min";
+                    }
+                }, 60000);
+            } else {
+                rented = false;
                 text.textContent = "Du har lämnat tillbaka elsparkcykeln!";
                 text.style.color = "red";
-                text.textContent = tid;
-                text.style.color = "red";
-                clearInterval(timerId);
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+                teht.textContent = tid;
             }
-    })
+        });
     </script>
 </body>
 </html>
