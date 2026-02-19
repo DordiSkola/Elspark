@@ -2,39 +2,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="VHDeS.se.css">
+    <link rel="stylesheet" href="VHDeS.css">
     <title>VHDeS.se</title>
 </head>
-<body>
-    <form id="myForm">
-        <label for="username">Please enter your username:</label>
-        <input type="text" id="username" name="username">
+<body class="VHDeS"> <!-- klass för just den bodyn-->
+    <div class="box"> <!--en box för lättare syn-->
+    <form id="myForm"> 
+        <label for="username">Please enter your username:</label> <!--skriv in username-->
+        <input type="text" id="username" name="username"> 
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
         <br>
         <input type="submit" value="Submit">
     </form>
-
+    </div> 
     <script>
         let username = null;
-        const form = document.getElementById('myForm');
+        const form = document.getElementById('myForm'); //variabeln form får info från id:n "myForm"
 
-        form.addEventListener('submit', function (event){
+        form.addEventListener('submit', function (event){ //När man trycker submit ska den kolla om allt stämmer och om det gör det går den till nästa webbsida
             event.preventDefault();
             
             const text = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
             console.log(text + password);
-            if(text == "darre01"&&password == "darresarre" || text == "dorla01" && password == "dorreborre"){
+            if(text == "darre01"&&password == "darresarre" || text == "dorla01" && password == "dorreborre"){ //alla användarnamn och lösenord som är korrekta
                 username = text;
                 window.location.href = `VHDeSrättAnvändare.html?username=${encodeURIComponent(username)}`;
             }
             else{
-                alert("Fel användarnamn eller lösenord");
+                alert("Fel användarnamn och/eller lösenord"); //om det är fel username och/eller lösenord skriver den ut fel användarnamn och/eller lösenord
             }
         });
     </script>
 </body>
-</html>
+</html> 

@@ -2,19 +2,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="VHDeS.css">
     <title>Document</title>
 </head>
-<body>
+<body class="rätt"> <!--nästan allt här är för css-->
         <h2 id="welcome"></h2>
+        <div class="flex">
+        <img class="img" src="elspark.avif" alt="">
         <button id="hyra">Hyr en elsparkcykel i 1h</button>
+        <div class="box1">
         <p id="text"></p>
         <p id="teht"></p>
+        </div>
+    </div>
     <script>
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search); //tror att den söker för användarnamn från länken username
         const welcome = document.getElementById("welcome");
-        let username = params.get('username');
+        let username = params.get('username'); //lägger den username från länken den nya username som skrivs ut sen
         if(username){
-            welcome.textContent = `Välkommen ${username}!`;
+            welcome.textContent = `Välkommen ${username}!`;//skriver ut hälkommen osen username
         }
         let tid = 60;
         const knapp = document.getElementById('hyra');
@@ -58,4 +64,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
